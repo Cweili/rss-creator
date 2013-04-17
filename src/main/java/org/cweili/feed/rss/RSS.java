@@ -22,7 +22,6 @@ import org.cweili.feed.rss.model.Item;
  */
 public class RSS {
 
-	private Channel channel;
 	private String title;
 	private String link;
 	private String atomLink;
@@ -33,10 +32,9 @@ public class RSS {
 	private List<Item> items = new ArrayList<Item>();
 
 	/**
-	 * A Empty RSS Feed.
+	 * A empty RSS feed.
 	 */
 	public RSS() {
-		channel = new Channel();
 		title = "";
 		link = "";
 		atomLink = "";
@@ -47,7 +45,7 @@ public class RSS {
 	}
 
 	/**
-	 * Generate default Chinese RSS Feed.
+	 * Generate default Chinese RSS feed.
 	 * 
 	 * @param title
 	 *            the title
@@ -74,7 +72,7 @@ public class RSS {
 	}
 
 	/**
-	 * Generate RSS Feed.
+	 * Generate RSS feed.
 	 * 
 	 * @param title
 	 *            the title
@@ -271,6 +269,7 @@ public class RSS {
 
 	@Override
 	public String toString() {
+		final Channel channel = new Channel();
 		channel.setTitle(title);
 		channel.setLink(link);
 		channel.setAtomLink(atomLink);
@@ -278,6 +277,7 @@ public class RSS {
 		channel.setGenerator(generator);
 		channel.setLastBuildDate(lastBuildDate);
 		channel.setLanguage(language);
+
 		for (Item item : items) {
 			channel.addItem(item);
 		}

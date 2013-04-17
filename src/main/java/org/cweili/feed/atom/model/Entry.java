@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
-
 /**
  * Entry
  * 
@@ -42,7 +40,6 @@ public final class Entry implements Serializable, Cloneable {
 	private Date updated;
 	private String title;
 	private String summary;
-
 	private String link;
 	private String author;
 	private String uri;
