@@ -2,6 +2,7 @@ package org.cweili.feed.rss;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -35,13 +36,7 @@ public class RSS {
 	 * A empty RSS feed.
 	 */
 	public RSS() {
-		title = "";
-		link = "";
-		atomLink = "";
-		description = "";
-		generator = "";
-		lastBuildDate = new Date();
-		language = "zh-CN";
+		this("", "", "", "", "", new Date());
 	}
 
 	/**
@@ -62,13 +57,7 @@ public class RSS {
 	 */
 	public RSS(String title, String link, String atomLink, String description, String generator,
 			Date lastBuildDate) {
-		this.title = title;
-		this.link = link;
-		this.atomLink = atomLink;
-		this.description = description;
-		this.generator = generator;
-		this.lastBuildDate = lastBuildDate;
-		this.language = "zh-CN";
+		this(title, link, atomLink, description, generator, lastBuildDate, "zh-CN");
 	}
 
 	/**
@@ -118,21 +107,7 @@ public class RSS {
 	 */
 	public void addItem(String title, String link, String author, String description, Date pubDate,
 			Collection<String> categories) {
-		Item item = new Item();
-		item.setTitle(title);
-		item.setLink(link);
-		item.setGUID(link);
-		item.setAuthor(author);
-		item.setDescription(description);
-		item.setPubDate(pubDate);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			item.addCatetory(category);
-		}
-
-		items.add(item);
+		this.addItem(title, link, link, author, description, pubDate, categories);
 	}
 
 	/**
@@ -153,21 +128,7 @@ public class RSS {
 	 */
 	public void addItem(String title, String link, String author, String description, Date pubDate,
 			String[] categories) {
-		Item item = new Item();
-		item.setTitle(title);
-		item.setLink(link);
-		item.setGUID(link);
-		item.setAuthor(author);
-		item.setDescription(description);
-		item.setPubDate(pubDate);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			item.addCatetory(category);
-		}
-
-		items.add(item);
+		this.addItem(title, link, link, author, description, pubDate, categories);
 	}
 
 	/**
@@ -227,21 +188,9 @@ public class RSS {
 	 */
 	public void addItem(String title, String link, String guid, String author, String description,
 			Date pubDate, String[] categories) {
-		Item item = new Item();
-		item.setTitle(title);
-		item.setLink(link);
-		item.setGUID(guid);
-		item.setAuthor(author);
-		item.setDescription(description);
-		item.setPubDate(pubDate);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			item.addCatetory(category);
-		}
-
-		items.add(item);
+		List<String> list = new ArrayList<String>(categories.length);
+		Collections.addAll(list, categories);
+		this.addItem(title, link, guid, author, description, pubDate, list);
 	}
 
 	/**

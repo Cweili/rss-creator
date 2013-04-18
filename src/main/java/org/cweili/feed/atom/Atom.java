@@ -2,6 +2,7 @@ package org.cweili.feed.atom;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -35,13 +36,7 @@ public class Atom {
 	 * A empty Atom feed.
 	 */
 	public Atom() {
-		title = "";
-		subtitle = "";
-		link = "";
-		author = "";
-		id = "";
-		generator = "";
-		updated = new Date();
+		this("", "", "", "", "", "", new Date());
 	}
 
 	/**
@@ -91,20 +86,7 @@ public class Atom {
 	 */
 	public void addEntry(String title, String link, String author, String summary, Date updated,
 			Collection<String> categories) {
-		Entry entry = new Entry();
-		entry.setTitle(title);
-		entry.setLink(link);
-		entry.setId(link);
-		entry.setAuthor(author);
-		entry.setURI(this.link);
-		entry.setSummary(summary);
-		entry.setUpdated(updated);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			entries.add(entry);
-		}
+		this.addEntry(title, link, link, author, summary, updated, categories);
 	}
 
 	/**
@@ -125,20 +107,7 @@ public class Atom {
 	 */
 	public void addEntry(String title, String link, String author, String summary, Date updated,
 			String[] categories) {
-		Entry entry = new Entry();
-		entry.setTitle(title);
-		entry.setLink(link);
-		entry.setId(link);
-		entry.setAuthor(author);
-		entry.setURI(this.link);
-		entry.setSummary(summary);
-		entry.setUpdated(updated);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			entries.add(entry);
-		}
+		this.addEntry(title, link, link, author, summary, updated, categories);
 	}
 
 	/**
@@ -161,20 +130,7 @@ public class Atom {
 	 */
 	public void addEntry(String title, String link, String id, String author, String summary,
 			Date updated, Collection<String> categories) {
-		Entry entry = new Entry();
-		entry.setTitle(title);
-		entry.setLink(link);
-		entry.setId(id);
-		entry.setAuthor(author);
-		entry.setURI(this.link);
-		entry.setSummary(summary);
-		entry.setUpdated(updated);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			entries.add(entry);
-		}
+		this.addEntry(title, link, id, author, this.link, summary, updated, categories);
 	}
 
 	/**
@@ -197,20 +153,7 @@ public class Atom {
 	 */
 	public void addEntry(String title, String link, String id, String author, String summary,
 			Date updated, String[] categories) {
-		Entry entry = new Entry();
-		entry.setTitle(title);
-		entry.setLink(link);
-		entry.setId(id);
-		entry.setAuthor(author);
-		entry.setURI(this.link);
-		entry.setSummary(summary);
-		entry.setUpdated(updated);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			entries.add(entry);
-		}
+		this.addEntry(title, link, id, author, this.link, summary, updated, categories);
 	}
 
 	/**
@@ -273,20 +216,9 @@ public class Atom {
 	 */
 	public void addEntry(String title, String link, String id, String author, String uri,
 			String summary, Date updated, String[] categories) {
-		Entry entry = new Entry();
-		entry.setTitle(title);
-		entry.setLink(link);
-		entry.setId(id);
-		entry.setAuthor(author);
-		entry.setURI(uri);
-		entry.setSummary(summary);
-		entry.setUpdated(updated);
-
-		for (String term : categories) {
-			Category category = new Category();
-			category.setTerm(term);
-			entries.add(entry);
-		}
+		List<String> list = new ArrayList<String>(categories.length);
+		Collections.addAll(list, categories);
+		this.addEntry(title, link, id, author, uri, summary, updated, list);
 	}
 
 	/**
