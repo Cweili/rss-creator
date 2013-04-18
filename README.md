@@ -1,6 +1,14 @@
 RSS Creator
 ===========
 
+RSS 2.0
+-----------
+See [RSS 2.0 at Harvard Law](http://cyber.law.harvard.edu/rss/rss.html) for more details.
+
+Atom 1.0
+-----------
+See [RFC 4278](http://tools.ietf.org/html/rfc4287) for more details.
+
 Examples
 -----------
 
