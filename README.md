@@ -17,7 +17,7 @@ Examples
 -----------
 
 Generate default Chinese RSS 2.0 feed
-
+```java
 	/**
 	 * Generate default Chinese RSS feed.
 	 * 
@@ -81,7 +81,7 @@ Generate default Chinese RSS 2.0 feed
 			new Date(), categories);
 	
 	System.out.println(rss);
-
+```
 - - - - - -
 
 Generate Atom 1.0 feed.
