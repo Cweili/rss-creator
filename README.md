@@ -9,6 +9,10 @@ Atom 1.0
 -----------
 See [RFC 4278](http://tools.ietf.org/html/rfc4287) for more details.
 
+Dependency
+-----------
+[Apache Commons Lang 3](http://commons.apache.org/proper/commons-lang/)
+
 Examples
 -----------
 
