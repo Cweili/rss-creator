@@ -2,6 +2,8 @@ package org.cweili.feed.atom.model;
 
 import java.io.Serializable;
 
+import org.cweili.feed.util.Utils;
+
 /**
  * Category
  * 
@@ -38,6 +40,6 @@ public final class Category implements Serializable, Cloneable {
 
 	@Override
 	public String toString() {
-		return CATEGORY_BEGIN + term + CATEGORY_END;
+		return CATEGORY_BEGIN + Utils.htmlSpecialChars(term) + CATEGORY_END;
 	}
 }

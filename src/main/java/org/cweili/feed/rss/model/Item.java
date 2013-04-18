@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TimeZone;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.cweili.feed.util.Utils;
 
 /**
  * Item
@@ -18,14 +19,14 @@ public final class Item {
 
 	private static final String ITEM_BEGIN = "<item>";
 	private static final String ITEM_END = "</item>";
-	private static final String TITLE_BEGIN = "<title>";
-	private static final String TITLE_END = "</title>";
+	private static final String TITLE_BEGIN = "<title><![CDATA[";
+	private static final String TITLE_END = "]]></title>";
 	private static final String LINK_BEGIN = "<link>";
 	private static final String LINK_END = "</link>";
-	private static final String DESCRIPTION_BEGIN = "<description>";
-	private static final String DESCRIPTION_END = "</description>";
-	private static final String AUTHOR_BEGIN = "<author>";
-	private static final String AUTHOR_END = "</author>";
+	private static final String DESCRIPTION_BEGIN = "<description><![CDATA[";
+	private static final String DESCRIPTION_END = "]]></description>";
+	private static final String AUTHOR_BEGIN = "<author><![CDATA[";
+	private static final String AUTHOR_END = "]]></author>";
 	private static final String GUID_BEGIN = "<guid isPermaLink=\"false\">";
 	private static final String GUID_END = "</guid>";
 	private static final String PUB_DATE_BEGIN = "<pubDate>";
@@ -167,13 +168,15 @@ public final class Item {
 	public String toString() {
 		final StringBuilder stringBuilder = new StringBuilder(ITEM_BEGIN);
 
-		stringBuilder.append(TITLE_BEGIN).append(title).append(TITLE_END);
+		stringBuilder.append(TITLE_BEGIN).append(Utils.cdataSpecialChars(title)).append(TITLE_END);
 
 		stringBuilder.append(LINK_BEGIN).append(link).append(LINK_END);
 
-		stringBuilder.append(DESCRIPTION_BEGIN).append(description).append(DESCRIPTION_END);
+		stringBuilder.append(DESCRIPTION_BEGIN).append(Utils.cdataSpecialChars(description))
+				.append(DESCRIPTION_END);
 
-		stringBuilder.append(AUTHOR_BEGIN).append(author).append(AUTHOR_END);
+		stringBuilder.append(AUTHOR_BEGIN).append(Utils.cdataSpecialChars(author))
+				.append(AUTHOR_END);
 
 		stringBuilder.append(GUID_BEGIN).append(guid).append(GUID_END);
 

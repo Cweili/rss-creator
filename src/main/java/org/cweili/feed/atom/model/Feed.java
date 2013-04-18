@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.cweili.feed.util.Utils;
 
 /**
  * Atom 1.0 feed
@@ -28,16 +29,18 @@ public final class Feed implements Serializable, Cloneable {
 	private static final String FEED_END = "</feed>";
 	private static final String ID_BEGIN = "<id>";
 	private static final String ID_END = "</id>";
-	private static final String TITLE_BEGIN = "<title type=\"text\">";
-	private static final String TITLE_END = "</title>";
-	private static final String SUBTITLE_BEGIN = "<subtitle type=\"text\"> ";
-	private static final String SUBTITLE_END = "</subtitle>";
+	private static final String TITLE_BEGIN = "<title type=\"text\"><![CDATA[";
+	private static final String TITLE_END = "]]></title>";
+	private static final String SUBTITLE_BEGIN = "<subtitle type=\"text\"><![CDATA[";
+	private static final String SUBTITLE_END = "]]></subtitle>";
 	private static final String UPDATED_BEGIN = "<updated>";
 	private static final String UPDATED_END = "</updated>";
-	private static final String AUTHOR_BEGIN = "<author><name>";
-	private static final String AUTHOR_END = "</name></author>";
+	private static final String AUTHOR_BEGIN = "<author><name><![CDATA[";
+	private static final String AUTHOR_END = "]]></name></author>";
 	private static final String LINK_BEGIN = "<link href=\"";
-	private static final String LINK_END = "\" rel=\"self\" type=\"application/atom+xml\" />";
+	private static final String LINK_END = "\" rel=\"alternate\" type=\"text/html\" />";
+	private static final String GENERATOR_BEGIN = "<generator><![CDATA[";
+	private static final String GENERATOR_END = "]]></generator>";
 
 	private String id;
 	private String title;
@@ -45,6 +48,7 @@ public final class Feed implements Serializable, Cloneable {
 	private Date updated;
 	private String author;
 	private String link;
+	private String generator;
 	private List<Entry> entries = new ArrayList<Entry>();
 
 	public static final String TIME_ZONE_ID = "Asia/Shanghai";
@@ -179,9 +183,10 @@ public final class Feed implements Serializable, Cloneable {
 
 		stringBuilder.append(ID_BEGIN).append(id).append(ID_END);
 
-		stringBuilder.append(TITLE_BEGIN).append(title).append(TITLE_END);
+		stringBuilder.append(TITLE_BEGIN).append(Utils.cdataSpecialChars(title)).append(TITLE_END);
 
-		stringBuilder.append(SUBTITLE_BEGIN).append(subtitle).append(SUBTITLE_END);
+		stringBuilder.append(SUBTITLE_BEGIN).append(Utils.cdataSpecialChars(subtitle))
+				.append(SUBTITLE_END);
 
 		stringBuilder.append(UPDATED_BEGIN);
 		stringBuilder.append(DateFormatUtils.format(
@@ -190,9 +195,13 @@ public final class Feed implements Serializable, Cloneable {
 				TimeZone.getTimeZone(TIME_ZONE_ID)));
 		stringBuilder.append(UPDATED_END);
 
-		stringBuilder.append(AUTHOR_BEGIN).append(author).append(AUTHOR_END);
+		stringBuilder.append(AUTHOR_BEGIN).append(Utils.cdataSpecialChars(author))
+				.append(AUTHOR_END);
 
 		stringBuilder.append(LINK_BEGIN).append(link).append(LINK_END);
+
+		stringBuilder.append(GENERATOR_BEGIN).append(Utils.cdataSpecialChars(generator))
+				.append(GENERATOR_END);
 
 		for (final Entry entry : entries) {
 			stringBuilder.append(entry.toString());
@@ -201,5 +210,24 @@ public final class Feed implements Serializable, Cloneable {
 		stringBuilder.append(FEED_END);
 
 		return stringBuilder.toString();
+	}
+
+	/**
+	 * Gets the generator
+	 * 
+	 * @return generator
+	 */
+	public String getGenerator() {
+		return generator;
+	}
+
+	/**
+	 * Sets the generator
+	 * 
+	 * @param generator
+	 *            the specified generator
+	 */
+	public void setGenerator(String generator) {
+		this.generator = generator;
 	}
 }

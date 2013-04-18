@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.cweili.feed.util.Utils;
+
 /**
  * Entry
  * 
@@ -19,18 +22,18 @@ public final class Entry implements Serializable, Cloneable {
 	private static final long serialVersionUID = 3445981458816005673L;
 	private static final String ENTRY_BEGIN = "<entry>";
 	private static final String ENTRY_END = "</entry>";
-	private static final String TITLE_BEGIN = "<title type=\"text\">";
-	private static final String TITLE_END = "</title>";
+	private static final String TITLE_BEGIN = "<title type=\"text\"><![CDATA[";
+	private static final String TITLE_END = "]]></title>";
 	private static final String AUTHOR_BEGIN = "<author>";
 	private static final String AUTHOR_END = "</author>";
-	private static final String NAME_BEGIN = "<name>";
-	private static final String NAME_END = "</name>";
+	private static final String NAME_BEGIN = "<name><![CDATA[";
+	private static final String NAME_END = "]]></name>";
 	private static final String URI_BEGIN = "<uri>";
 	private static final String URI_END = "</uri>";
 	private static final String ID_BEGIN = "<id>";
 	private static final String ID_END = "</id>";
-	private static final String SUMMARY_BEGIN = "<summary type=\"html\">";
-	private static final String SUMMARY_END = "</summary>";
+	private static final String SUMMARY_BEGIN = "<summary type=\"html\"><![CDATA[";
+	private static final String SUMMARY_END = "]]></summary>";
 	private static final String LINK_BEGIN = "<link href=\"";
 	private static final String LINK_END = "\" />";
 	private static final String UPDATED_BEGIN = "<updated>";
@@ -201,10 +204,10 @@ public final class Entry implements Serializable, Cloneable {
 	public String toString() {
 		final StringBuilder stringBuilder = new StringBuilder(ENTRY_BEGIN);
 
-		stringBuilder.append(TITLE_BEGIN).append(title).append(TITLE_END);
+		stringBuilder.append(TITLE_BEGIN).append(Utils.cdataSpecialChars(title)).append(TITLE_END);
 
 		stringBuilder.append(AUTHOR_BEGIN);
-		stringBuilder.append(NAME_BEGIN).append(author).append(NAME_END);
+		stringBuilder.append(NAME_BEGIN).append(Utils.cdataSpecialChars(author)).append(NAME_END);
 		stringBuilder.append(URI_BEGIN).append(uri).append(URI_END);
 		stringBuilder.append(AUTHOR_END);
 
@@ -222,7 +225,8 @@ public final class Entry implements Serializable, Cloneable {
 				TimeZone.getTimeZone(Feed.TIME_ZONE_ID)));
 		stringBuilder.append(UPDATED_END);
 
-		stringBuilder.append(SUMMARY_BEGIN).append(summary).append(SUMMARY_END);
+		stringBuilder.append(SUMMARY_BEGIN).append(Utils.cdataSpecialChars(summary))
+				.append(SUMMARY_END);
 
 		stringBuilder.append(ENTRY_END);
 

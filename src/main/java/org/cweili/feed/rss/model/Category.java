@@ -2,6 +2,8 @@ package org.cweili.feed.rss.model;
 
 import java.io.Serializable;
 
+import org.cweili.feed.util.Utils;
+
 /**
  * Category
  * 
@@ -12,8 +14,8 @@ import java.io.Serializable;
 public final class Category implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -8513042087874911791L;
-	private static final String CATEGORY_BEGIN = "<category>";
-	private static final String CATEGORY_END = "</category>";
+	private static final String CATEGORY_BEGIN = "<category><![CDATA[";
+	private static final String CATEGORY_END = "]]></category>";
 
 	private String term;
 
@@ -38,6 +40,6 @@ public final class Category implements Serializable, Cloneable {
 
 	@Override
 	public String toString() {
-		return CATEGORY_BEGIN + term + CATEGORY_END;
+		return CATEGORY_BEGIN + Utils.cdataSpecialChars(term) + CATEGORY_END;
 	}
 }

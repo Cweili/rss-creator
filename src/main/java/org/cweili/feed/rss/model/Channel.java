@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.cweili.feed.util.Utils;
 
 /**
  * RSS 2.0 channel
@@ -23,16 +24,16 @@ public final class Channel {
 
 	private static final String CHANNEL_BEGIN = "<?xml version='1.0' encoding='UTF-8'?><rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\"><channel>";
 	private static final String CHANNEL_END = "</channel></rss>";
-	private static final String TITLE_BEGIN = "<title>";
-	private static final String TITLE_END = "</title>";
+	private static final String TITLE_BEGIN = "<title><![CDATA[";
+	private static final String TITLE_END = "]]></title>";
 	private static final String LINK_BEGIN = "<link>";
 	private static final String LINK_END = "</link>";
 	private static final String ATOM_LINK_BEGIN = "<atom:link href=\"";
 	private static final String ATOM_LINK_END = "\" rel=\"self\" type=\"application/rss+xml\" />";
-	private static final String DESCRIPTION_BEGIN = "<description>";
-	private static final String DESCRIPTION_END = "</description>";
-	private static final String GENERATOR_BEGIN = "<generator>";
-	private static final String GENERATOR_END = "</generator>";
+	private static final String DESCRIPTION_BEGIN = "<description><![CDATA[";
+	private static final String DESCRIPTION_END = "]]></description>";
+	private static final String GENERATOR_BEGIN = "<generator><![CDATA[";
+	private static final String GENERATOR_END = "]]></generator>";
 	private static final String LANGUAGE_BEGIN = "<language>";
 	private static final String LANGUAGE_END = "</language>";
 	private static final String LAST_BUILD_DATE_BEGIN = "<lastBuildDate>";
@@ -196,15 +197,17 @@ public final class Channel {
 	public String toString() {
 		final StringBuilder stringBuilder = new StringBuilder(CHANNEL_BEGIN);
 
-		stringBuilder.append(TITLE_BEGIN).append(title).append(TITLE_END);
+		stringBuilder.append(TITLE_BEGIN).append(Utils.cdataSpecialChars(title)).append(TITLE_END);
 
 		stringBuilder.append(LINK_BEGIN).append(link).append(LINK_END);
 
 		stringBuilder.append(ATOM_LINK_BEGIN).append(atomLink).append(ATOM_LINK_END);
 
-		stringBuilder.append(DESCRIPTION_BEGIN).append(description).append(DESCRIPTION_END);
+		stringBuilder.append(DESCRIPTION_BEGIN).append(Utils.cdataSpecialChars(description))
+				.append(DESCRIPTION_END);
 
-		stringBuilder.append(GENERATOR_BEGIN).append(generator).append(GENERATOR_END);
+		stringBuilder.append(GENERATOR_BEGIN).append(Utils.cdataSpecialChars(generator))
+				.append(GENERATOR_END);
 
 		stringBuilder.append(LAST_BUILD_DATE_BEGIN);
 		stringBuilder.append(DateFormatUtils.SMTP_DATETIME_FORMAT.format(lastBuildDate));

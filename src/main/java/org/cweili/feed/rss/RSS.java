@@ -107,6 +107,76 @@ public class RSS {
 	 *            the title
 	 * @param link
 	 *            the permalink
+	 * @param author
+	 *            the author
+	 * @param description
+	 *            the description
+	 * @param pubDate
+	 *            the specified publish date
+	 * @param categories
+	 *            the categories
+	 */
+	public void addItem(String title, String link, String author, String description, Date pubDate,
+			Collection<String> categories) {
+		Item item = new Item();
+		item.setTitle(title);
+		item.setLink(link);
+		item.setGUID(link);
+		item.setAuthor(author);
+		item.setDescription(description);
+		item.setPubDate(pubDate);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			item.addCatetory(category);
+		}
+
+		items.add(item);
+	}
+
+	/**
+	 * Adds the specified item.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the permalink
+	 * @param author
+	 *            the author
+	 * @param description
+	 *            the description
+	 * @param pubDate
+	 *            the specified publish date
+	 * @param categories
+	 *            the categories
+	 */
+	public void addItem(String title, String link, String author, String description, Date pubDate,
+			String[] categories) {
+		Item item = new Item();
+		item.setTitle(title);
+		item.setLink(link);
+		item.setGUID(link);
+		item.setAuthor(author);
+		item.setDescription(description);
+		item.setPubDate(pubDate);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			item.addCatetory(category);
+		}
+
+		items.add(item);
+	}
+
+	/**
+	 * Adds the specified item.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the permalink
 	 * @param guid
 	 *            the specified GUID
 	 * @param author
@@ -127,11 +197,51 @@ public class RSS {
 		item.setAuthor(author);
 		item.setDescription(description);
 		item.setPubDate(pubDate);
+
 		for (String term : categories) {
 			Category category = new Category();
 			category.setTerm(term);
 			item.addCatetory(category);
 		}
+
+		items.add(item);
+	}
+
+	/**
+	 * Adds the specified item.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the permalink
+	 * @param guid
+	 *            the specified GUID
+	 * @param author
+	 *            the author
+	 * @param description
+	 *            the description
+	 * @param pubDate
+	 *            the specified publish date
+	 * @param categories
+	 *            the categories
+	 */
+	public void addItem(String title, String link, String guid, String author, String description,
+			Date pubDate, String[] categories) {
+		Item item = new Item();
+		item.setTitle(title);
+		item.setLink(link);
+		item.setGUID(guid);
+		item.setAuthor(author);
+		item.setDescription(description);
+		item.setPubDate(pubDate);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			item.addCatetory(category);
+		}
+
+		items.add(item);
 	}
 
 	/**

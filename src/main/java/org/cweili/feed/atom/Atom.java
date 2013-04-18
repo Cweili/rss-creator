@@ -28,6 +28,7 @@ public class Atom {
 	private String author;
 	private String id;
 	private Date updated;
+	private String generator;
 	private List<Entry> entries = new ArrayList<Entry>();
 
 	/**
@@ -39,6 +40,7 @@ public class Atom {
 		link = "";
 		author = "";
 		id = "";
+		generator = "";
 		updated = new Date();
 	}
 
@@ -55,15 +57,19 @@ public class Atom {
 	 *            the author
 	 * @param id
 	 *            the specified id
+	 * @param generator
+	 *            the generator
 	 * @param updated
 	 *            the specified updated time
 	 */
-	public Atom(String title, String subtitle, String link, String author, String id, Date updated) {
+	public Atom(String title, String subtitle, String link, String author, String id,
+			String generator, Date updated) {
 		this.title = title;
 		this.subtitle = subtitle;
 		this.link = link;
 		this.author = author;
 		this.id = id;
+		this.generator = generator;
 		this.updated = updated;
 	}
 
@@ -74,8 +80,74 @@ public class Atom {
 	 *            the title
 	 * @param link
 	 *            the link
-	 * @param uri
-	 *            the uri
+	 * @param author
+	 *            the author
+	 * @param summary
+	 *            the summary
+	 * @param updated
+	 *            the specified updated time
+	 * @param categories
+	 *            the categories
+	 */
+	public void addEntry(String title, String link, String author, String summary, Date updated,
+			Collection<String> categories) {
+		Entry entry = new Entry();
+		entry.setTitle(title);
+		entry.setLink(link);
+		entry.setId(link);
+		entry.setAuthor(author);
+		entry.setURI(this.link);
+		entry.setSummary(summary);
+		entry.setUpdated(updated);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			entries.add(entry);
+		}
+	}
+
+	/**
+	 * Adds the specified entry.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the link
+	 * @param author
+	 *            the author
+	 * @param summary
+	 *            the summary
+	 * @param updated
+	 *            the specified updated time
+	 * @param categories
+	 *            the categories
+	 */
+	public void addEntry(String title, String link, String author, String summary, Date updated,
+			String[] categories) {
+		Entry entry = new Entry();
+		entry.setTitle(title);
+		entry.setLink(link);
+		entry.setId(link);
+		entry.setAuthor(author);
+		entry.setURI(this.link);
+		entry.setSummary(summary);
+		entry.setUpdated(updated);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			entries.add(entry);
+		}
+	}
+
+	/**
+	 * Adds the specified entry.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the link
 	 * @param id
 	 *            the specified id
 	 * @param author
@@ -87,14 +159,126 @@ public class Atom {
 	 * @param categories
 	 *            the categories
 	 */
-	public void addEntry(String title, String link, String uri, String id, String author,
+	public void addEntry(String title, String link, String id, String author, String summary,
+			Date updated, Collection<String> categories) {
+		Entry entry = new Entry();
+		entry.setTitle(title);
+		entry.setLink(link);
+		entry.setId(id);
+		entry.setAuthor(author);
+		entry.setURI(this.link);
+		entry.setSummary(summary);
+		entry.setUpdated(updated);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			entries.add(entry);
+		}
+	}
+
+	/**
+	 * Adds the specified entry.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the link
+	 * @param id
+	 *            the specified id
+	 * @param author
+	 *            the author
+	 * @param summary
+	 *            the summary
+	 * @param updated
+	 *            the specified updated time
+	 * @param categories
+	 *            the categories
+	 */
+	public void addEntry(String title, String link, String id, String author, String summary,
+			Date updated, String[] categories) {
+		Entry entry = new Entry();
+		entry.setTitle(title);
+		entry.setLink(link);
+		entry.setId(id);
+		entry.setAuthor(author);
+		entry.setURI(this.link);
+		entry.setSummary(summary);
+		entry.setUpdated(updated);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			entries.add(entry);
+		}
+	}
+
+	/**
+	 * Adds the specified entry.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the link
+	 * @param id
+	 *            the specified id
+	 * @param author
+	 *            the author
+	 * @param uri
+	 *            the author uri
+	 * @param summary
+	 *            the summary
+	 * @param updated
+	 *            the specified updated time
+	 * @param categories
+	 *            the categories
+	 */
+	public void addEntry(String title, String link, String id, String author, String uri,
 			String summary, Date updated, Collection<String> categories) {
 		Entry entry = new Entry();
 		entry.setTitle(title);
 		entry.setLink(link);
-		entry.setURI(uri);
 		entry.setId(id);
 		entry.setAuthor(author);
+		entry.setURI(uri);
+		entry.setSummary(summary);
+		entry.setUpdated(updated);
+
+		for (String term : categories) {
+			Category category = new Category();
+			category.setTerm(term);
+			entries.add(entry);
+		}
+	}
+
+	/**
+	 * Adds the specified entry.
+	 * 
+	 * @param title
+	 *            the title
+	 * @param link
+	 *            the link
+	 * @param id
+	 *            the specified id
+	 * @param author
+	 *            the author
+	 * @param uri
+	 *            the author uri
+	 * @param summary
+	 *            the summary
+	 * @param updated
+	 *            the specified updated time
+	 * @param categories
+	 *            the categories
+	 */
+	public void addEntry(String title, String link, String id, String author, String uri,
+			String summary, Date updated, String[] categories) {
+		Entry entry = new Entry();
+		entry.setTitle(title);
+		entry.setLink(link);
+		entry.setId(id);
+		entry.setAuthor(author);
+		entry.setURI(uri);
 		entry.setSummary(summary);
 		entry.setUpdated(updated);
 
@@ -219,6 +403,25 @@ public class Atom {
 		this.updated = updated;
 	}
 
+	/**
+	 * Gets the generator
+	 * 
+	 * @return generator
+	 */
+	public String getGenerator() {
+		return generator;
+	}
+
+	/**
+	 * Sets the generator
+	 * 
+	 * @param generator
+	 *            the specified generator
+	 */
+	public void setGenerator(String generator) {
+		this.generator = generator;
+	}
+
 	@Override
 	public String toString() {
 		final Feed feed = new Feed();
@@ -227,6 +430,7 @@ public class Atom {
 		feed.setLink(link);
 		feed.setAuthor(author);
 		feed.setId(id);
+		feed.setGenerator(generator);
 		feed.setUpdated(updated);
 
 		for (Entry entry : entries) {
