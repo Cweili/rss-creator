@@ -85,7 +85,7 @@ Generate default Chinese RSS 2.0 feed
 - - - - - -
 
 Generate Atom 1.0 feed.
-
+```java
 	/**
 	 * Generate Atom feed.
 	 * 
@@ -154,3 +154,4 @@ Generate Atom 1.0 feed.
 			new Date(), categories);
 	
 	System.out.println(atom);
+```
