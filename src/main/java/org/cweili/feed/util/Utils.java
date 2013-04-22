@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 public class Utils {
 
 	public static String cdataSpecialChars(String input) {
-		return StringUtils.replace(input, ">", "&gt;");
+		return StringUtils.replace(input, "]]>", "]]&gt;");
 	}
 
 	public static String htmlSpecialChars(String input) {
