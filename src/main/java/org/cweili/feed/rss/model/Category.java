@@ -40,6 +40,6 @@ public final class Category implements Serializable, Cloneable {
 
 	@Override
 	public String toString() {
-		return CATEGORY_BEGIN + Utils.cdataSpecialChars(term) + CATEGORY_END;
+		return CATEGORY_BEGIN + Utils.escapeCdata(term) + CATEGORY_END;
 	}
 }

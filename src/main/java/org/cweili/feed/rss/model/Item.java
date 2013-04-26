@@ -168,15 +168,14 @@ public final class Item {
 	public String toString() {
 		final StringBuilder stringBuilder = new StringBuilder(ITEM_BEGIN);
 
-		stringBuilder.append(TITLE_BEGIN).append(Utils.cdataSpecialChars(title)).append(TITLE_END);
+		stringBuilder.append(TITLE_BEGIN).append(Utils.escapeCdata(title)).append(TITLE_END);
 
 		stringBuilder.append(LINK_BEGIN).append(link).append(LINK_END);
 
-		stringBuilder.append(DESCRIPTION_BEGIN).append(Utils.cdataSpecialChars(description))
+		stringBuilder.append(DESCRIPTION_BEGIN).append(Utils.escapeCdata(description))
 				.append(DESCRIPTION_END);
 
-		stringBuilder.append(AUTHOR_BEGIN).append(Utils.cdataSpecialChars(author))
-				.append(AUTHOR_END);
+		stringBuilder.append(AUTHOR_BEGIN).append(Utils.escapeCdata(author)).append(AUTHOR_END);
 
 		stringBuilder.append(GUID_BEGIN).append(guid).append(GUID_END);
 

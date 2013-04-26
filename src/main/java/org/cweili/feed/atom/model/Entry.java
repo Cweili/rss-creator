@@ -204,10 +204,10 @@ public final class Entry implements Serializable, Cloneable {
 	public String toString() {
 		final StringBuilder stringBuilder = new StringBuilder(ENTRY_BEGIN);
 
-		stringBuilder.append(TITLE_BEGIN).append(Utils.cdataSpecialChars(title)).append(TITLE_END);
+		stringBuilder.append(TITLE_BEGIN).append(Utils.escapeCdata(title)).append(TITLE_END);
 
 		stringBuilder.append(AUTHOR_BEGIN);
-		stringBuilder.append(NAME_BEGIN).append(Utils.cdataSpecialChars(author)).append(NAME_END);
+		stringBuilder.append(NAME_BEGIN).append(Utils.escapeCdata(author)).append(NAME_END);
 		stringBuilder.append(URI_BEGIN).append(uri).append(URI_END);
 		stringBuilder.append(AUTHOR_END);
 
@@ -225,8 +225,7 @@ public final class Entry implements Serializable, Cloneable {
 				TimeZone.getTimeZone(Feed.TIME_ZONE_ID)));
 		stringBuilder.append(UPDATED_END);
 
-		stringBuilder.append(SUMMARY_BEGIN).append(Utils.cdataSpecialChars(summary))
-				.append(SUMMARY_END);
+		stringBuilder.append(SUMMARY_BEGIN).append(Utils.escapeCdata(summary)).append(SUMMARY_END);
 
 		stringBuilder.append(ENTRY_END);
 

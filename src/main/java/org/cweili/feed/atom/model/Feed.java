@@ -183,9 +183,9 @@ public final class Feed implements Serializable, Cloneable {
 
 		stringBuilder.append(ID_BEGIN).append(id).append(ID_END);
 
-		stringBuilder.append(TITLE_BEGIN).append(Utils.cdataSpecialChars(title)).append(TITLE_END);
+		stringBuilder.append(TITLE_BEGIN).append(Utils.escapeCdata(title)).append(TITLE_END);
 
-		stringBuilder.append(SUBTITLE_BEGIN).append(Utils.cdataSpecialChars(subtitle))
+		stringBuilder.append(SUBTITLE_BEGIN).append(Utils.escapeCdata(subtitle))
 				.append(SUBTITLE_END);
 
 		stringBuilder.append(UPDATED_BEGIN);
@@ -195,12 +195,11 @@ public final class Feed implements Serializable, Cloneable {
 				TimeZone.getTimeZone(TIME_ZONE_ID)));
 		stringBuilder.append(UPDATED_END);
 
-		stringBuilder.append(AUTHOR_BEGIN).append(Utils.cdataSpecialChars(author))
-				.append(AUTHOR_END);
+		stringBuilder.append(AUTHOR_BEGIN).append(Utils.escapeCdata(author)).append(AUTHOR_END);
 
 		stringBuilder.append(LINK_BEGIN).append(link).append(LINK_END);
 
-		stringBuilder.append(GENERATOR_BEGIN).append(Utils.cdataSpecialChars(generator))
+		stringBuilder.append(GENERATOR_BEGIN).append(Utils.escapeCdata(generator))
 				.append(GENERATOR_END);
 
 		for (final Entry entry : entries) {
